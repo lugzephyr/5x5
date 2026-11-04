@@ -15,5 +15,5 @@ pnpm build          # type-check + production build
 pnpm preview        # serve the build
 pnpm test           # vitest
 pnpm lint           # oxlint
-pnpm format         # prettier
+pnpm format         # oxfmt
 ```
