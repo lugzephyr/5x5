@@ -13,7 +13,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      pwaAssets: {},
+      pwaAssets: { injectThemeColor: false },
       manifest: {
         name: '5x5',
         short_name: '5x5',
