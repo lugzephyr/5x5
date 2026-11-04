@@ -17,8 +17,8 @@ import {
   useSettings,
 } from '@/data/repository'
 import {
-  changeWeight,
   breakDeloadPercent,
+  changeWeight,
   daysSinceLastWorkout,
   isComplete,
   isFullySkipped,

@@ -1,6 +1,6 @@
+import { cn } from 'cn'
 import type { Rest } from '@/domain/types'
 import { formatClock, useNow } from '@/lib/time'
-import { cn } from '@/lib/utils'
 
 export function RestTimer({ rest }: { rest: Rest }) {
   const now = useNow(250)

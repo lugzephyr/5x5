@@ -24,6 +24,7 @@ import { switchUnit } from '@/domain/settings'
 import { parseStrongLiftsCsv, type StrongLiftsImport } from '@/domain/stronglifts'
 import type { ExerciseId, Unit } from '@/domain/types'
 import { WEIGHT_STEP, fromUnit, toUnit } from '@/domain/units'
+import { DISPLAY_SIZES, getDisplaySize, saveDisplaySize } from '@/lib/display-size'
 
 export const Route = createFileRoute('/settings')({
   component: SettingsPage,
@@ -68,6 +69,7 @@ function SettingsPage() {
           unit={unit}
           onCommit={(barWeightKg) => saveSettings({ barWeightKg })}
         />
+        <DisplaySizeField />
       </Section>
 
       <Section title="Increments">
@@ -234,6 +236,22 @@ function BackupSection() {
         }}
       />
     </Section>
+  )
+}
+
+/** Kept per device outside the settings record, so it holds its own state. */
+function DisplaySizeField() {
+  const [size, setSize] = useState(getDisplaySize)
+  return (
+    <SelectField
+      label="Display size"
+      value={size}
+      options={DISPLAY_SIZES}
+      onChange={(next) => {
+        saveDisplaySize(next)
+        setSize(next)
+      }}
+    />
   )
 }
 

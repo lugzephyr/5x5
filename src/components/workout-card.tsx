@@ -1,11 +1,11 @@
 import { Link } from '@tanstack/react-router'
+import { cn } from 'cn'
 import { format } from 'date-fns'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { EXERCISES, exerciseResult, isFullySkipped } from '@/domain/program'
 import type { Unit, Workout } from '@/domain/types'
 import { formatWeight } from '@/domain/units'
 import { formatWorkoutDuration } from '@/lib/time'
-import { cn } from '@/lib/utils'
 
 /** A finished workout's summary, linking to its detail page. */
 export function WorkoutCard({ workout, unit }: { workout: Workout; unit: Unit }) {

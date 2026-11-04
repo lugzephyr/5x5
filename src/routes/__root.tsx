@@ -1,4 +1,6 @@
 import { Link, Outlet, createRootRoute } from '@tanstack/react-router'
+// Renders nothing outside development, so production builds leave it out
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { ChartLineIcon, DumbbellIcon, HistoryIcon, SettingsIcon } from 'lucide-react'
 import { ActiveWorkoutEffects } from '@/components/active-workout-effects'
 import { unlockAudio } from '@/lib/sound'
@@ -38,6 +40,7 @@ function RootLayout() {
           ))}
         </div>
       </nav>
+      <TanStackRouterDevtools />
     </div>
   )
 }

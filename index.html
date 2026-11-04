@@ -7,7 +7,14 @@
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <script>
+      // iOS reads the status bar style at launch and it takes no media query: dark bar in dark mode
+      if (matchMedia('(prefers-color-scheme: dark)').matches)
+        document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]').content =
+          'black'
+    </script>
+    <link rel="manifest" href="/manifest.webmanifest" />
     <title>5x5</title>
   </head>
   <body>

@@ -1,3 +1,4 @@
+import { cn } from 'cn'
 import {
   Card,
   CardAction,
@@ -6,10 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { WeightDialog } from '@/components/weight-dialog'
 import { EXERCISES, setResult } from '@/domain/program'
 import type { Unit, WorkoutExercise } from '@/domain/types'
-import { WeightDialog } from '@/components/weight-dialog'
-import { cn } from '@/lib/utils'
 
 interface Props {
   exercises: WorkoutExercise[]
@@ -70,7 +70,7 @@ function SetButton({ reps, targetReps, onClick }: SetButtonProps) {
       onClick={onClick}
       aria-label={reps === null ? 'Log set' : `${reps} reps`}
       className={cn(
-        'flex size-12 items-center justify-center rounded-full border-2 text-lg font-semibold transition-colors select-none',
+        'flex aspect-square max-w-12 flex-1 items-center justify-center rounded-full border-2 text-lg font-semibold transition-colors select-none',
         result === 'skipped' && 'border-border text-muted-foreground/50',
         result === 'done' && 'border-primary bg-primary text-primary-foreground',
         result === 'missed' && 'border-destructive bg-destructive/10 text-destructive',
