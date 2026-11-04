@@ -14,6 +14,6 @@ pnpm dev            # dev server
 pnpm build          # type-check + production build
 pnpm preview        # serve the build
 pnpm test           # vitest
-pnpm lint           # eslint
+pnpm lint           # oxlint
 pnpm format         # prettier
 ```
