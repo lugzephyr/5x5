@@ -26,3 +26,6 @@ dist-ssr
 
 # TanStack Router
 .tanstack
+
+# Local data files (exports, imports); never committed
+/data/

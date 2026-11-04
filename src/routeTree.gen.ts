@@ -10,33 +10,80 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as HistoryIndexRouteImport } from './routes/history.index'
+import { Route as HistoryWorkoutIdRouteImport } from './routes/history.$workoutId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProgressRoute = ProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryIndexRoute = HistoryIndexRouteImport.update({
+  id: '/history/',
+  path: '/history/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryWorkoutIdRoute = HistoryWorkoutIdRouteImport.update({
+  id: '/history/$workoutId',
+  path: '/history/$workoutId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
+  '/history/$workoutId': typeof HistoryWorkoutIdRoute
+  '/history/': typeof HistoryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
+  '/history/$workoutId': typeof HistoryWorkoutIdRoute
+  '/history': typeof HistoryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
+  '/history/$workoutId': typeof HistoryWorkoutIdRoute
+  '/history/': typeof HistoryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/progress' | '/settings' | '/history/$workoutId' | '/history/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/progress' | '/settings' | '/history/$workoutId' | '/history'
+  id:
+    | '__root__'
+    | '/'
+    | '/progress'
+    | '/settings'
+    | '/history/$workoutId'
+    | '/history/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProgressRoute: typeof ProgressRoute
+  SettingsRoute: typeof SettingsRoute
+  HistoryWorkoutIdRoute: typeof HistoryWorkoutIdRoute
+  HistoryIndexRoute: typeof HistoryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +95,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history/': {
+      id: '/history/'
+      path: '/history'
+      fullPath: '/history/'
+      preLoaderRoute: typeof HistoryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history/$workoutId': {
+      id: '/history/$workoutId'
+      path: '/history/$workoutId'
+      fullPath: '/history/$workoutId'
+      preLoaderRoute: typeof HistoryWorkoutIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProgressRoute: ProgressRoute,
+  SettingsRoute: SettingsRoute,
+  HistoryWorkoutIdRoute: HistoryWorkoutIdRoute,
+  HistoryIndexRoute: HistoryIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
