@@ -71,7 +71,7 @@ export function ProgressChart({ name, points, unit }: Props) {
                 minTickGap={32}
                 padding={{ left: 20, right: 12 }}
               />
-              <YAxis width={36} tickLine={false} axisLine={false} domain={['auto', 'auto']} />
+              <YAxis width="auto" tickLine={false} axisLine={false} domain={['auto', 'auto']} />
               <ChartTooltip
                 content={
                   <ChartTooltipContent

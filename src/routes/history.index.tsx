@@ -66,6 +66,7 @@ function HistoryCalendar({ workouts, unit }: { workouts: Workout[]; unit: Unit }
   const onDay = (date: Date) => workouts.filter((w) => isSameDay(w.date, date))
   // Built once per render so the calendar's per-day check doesn't scan every workout
   const workoutDays = new Set(workouts.map((w) => new Date(w.date).toDateString()))
+  const isWorkoutDay = (date: Date) => workoutDays.has(date.toDateString())
 
   function select(date: Date | undefined) {
     const found = date ? onDay(date) : []
@@ -86,7 +87,13 @@ function HistoryCalendar({ workouts, unit }: { workouts: Workout[]; unit: Unit }
             selected={day}
             onSelect={select}
             defaultMonth={new Date(workouts[0].date)}
-            disabled={(date) => !workoutDays.has(date.toDateString())}
+            disabled={(date) => !isWorkoutDay(date)}
+            // Workout days get the filled box, so today is an outline to tell them apart
+            modifiers={{ workout: isWorkoutDay }}
+            modifiersClassNames={{ workout: 'bg-muted' }}
+            classNames={{
+              today: 'rounded-(--cell-radius) ring-1 ring-muted-foreground/50 ring-inset',
+            }}
           />
         </CardContent>
       </Card>

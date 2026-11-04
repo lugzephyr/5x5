@@ -8,13 +8,15 @@ import { progressSeries } from '@/domain/progress'
 import type { ExerciseId } from '@/domain/types'
 
 const DAY_MS = 86_400_000
-const RANGES = { '1m': 30, '3m': 90, all: Infinity } as const
+const RANGES = { '1m': 30, '3m': 90, '1y': 365, all: Infinity } as const
 type Range = keyof typeof RANGES
 
 export const Route = createFileRoute('/progress')({
   // The range lives in the URL like History's view, so it survives navigation
   validateSearch: (search): { range?: Range } =>
-    search.range === '1m' || search.range === '3m' ? { range: search.range } : {},
+    search.range === '1m' || search.range === '3m' || search.range === '1y'
+      ? { range: search.range }
+      : {},
   component: ProgressPage,
 })
 
@@ -44,6 +46,7 @@ function ProgressPage() {
         >
           <ToggleGroupItem value="1m">1M</ToggleGroupItem>
           <ToggleGroupItem value="3m">3M</ToggleGroupItem>
+          <ToggleGroupItem value="1y">1Y</ToggleGroupItem>
           <ToggleGroupItem value="all">All</ToggleGroupItem>
         </ToggleGroup>
       </header>
